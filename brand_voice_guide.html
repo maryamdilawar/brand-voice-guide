@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Sounding Like Everyone Else — Maryam Dilawar</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+  :root {
+    --dark:#070707;--dark2:#0F0F0F;--dark3:#161616;--dark4:#1E1E1E;
+    --gold:#C9A84C;--goldf:#4A3A15;
+    --cream:#EDE6D3;--cream2:#C8BFA8;--cream3:#8A8275;--muted:#4A4A45;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;}
+
+  .progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0%;z-index:100;transition:width .1s;}
+
+  nav{position:fixed;top:0;left:0;right:0;height:48px;background:rgba(7,7,7,0.94);backdrop-filter:blur(12px);border-bottom:1px solid #111;display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:99;}
+  .nav-name{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+  .nav-pages{display:flex;gap:7px;}
+  .nav-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);cursor:pointer;transition:background .2s;}
+  .nav-dot.active{background:var(--gold);}
+
+  section{min-height:100vh;padding:96px 0 80px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+  section:nth-child(even){background:var(--dark2);}
+  section::before,section::after{content:'';position:absolute;width:14px;height:14px;border-color:var(--goldf);border-style:solid;}
+  section::before{top:20px;left:20px;border-width:1px 0 0 1px;}
+  section::after{bottom:20px;right:20px;border-width:0 1px 1px 0;}
+
+  .container{max-width:740px;margin:0 auto;padding:0 32px;width:100%;}
+
+  .pg-label{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:block;}
+  h1,h2{font-family:'DM Serif Display',serif;line-height:1.05;margin-bottom:8px;}
+  .title-white{color:var(--cream);}
+  .title-gold{color:var(--gold);}
+  .intro{font-size:15px;color:var(--cream2);margin:20px 0 36px;max-width:580px;}
+  .divider{width:48px;height:1px;background:var(--goldf);margin:28px 0;}
+
+  /* COVER */
+  #cover{text-align:center;background:var(--dark);}
+  .glow{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:600px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,0.07) 0%,transparent 65%);pointer-events:none;}
+  .eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:28px;}
+  #cover h1{font-size:clamp(42px,8vw,70px);}
+  .sub{font-size:15px;color:var(--cream2);margin:24px auto 36px;max-width:440px;line-height:1.7;}
+  .promise-box{display:inline-block;border:1px solid rgba(201,168,76,0.2);background:var(--dark3);padding:20px 36px;margin-bottom:40px;}
+  .promise-box .pt{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+  .promise-box p{font-size:13px;color:var(--cream2);line-height:1.8;}
+  .author-line{font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .author-line strong{color:var(--cream);font-size:15px;letter-spacing:2px;display:block;margin-bottom:4px;font-weight:600;}
+
+  /* SIGNS */
+  .signs{display:flex;flex-direction:column;gap:4px;margin-bottom:28px;}
+  .sign{background:var(--dark3);padding:22px 24px;position:relative;border-top:1.5px solid var(--gold);}
+  .sign-num{font-family:'DM Serif Display',serif;font-size:40px;color:rgba(201,168,76,0.06);position:absolute;top:10px;right:16px;line-height:1;}
+  .sign h3{font-size:14px;font-weight:600;color:var(--cream);margin-bottom:6px;font-family:'DM Sans',sans-serif;}
+  .sign p{font-size:13px;color:var(--cream3);line-height:1.65;}
+
+  .pull-quote{border-left:2.5px solid var(--gold);background:var(--dark4);padding:18px 22px;font-style:italic;font-size:15px;color:var(--cream2);line-height:1.7;}
+
+  /* QUESTIONS */
+  .questions{display:flex;flex-direction:column;gap:4px;margin-bottom:28px;}
+  .q-card{background:var(--dark3);padding:22px 24px 18px;border-top:1.5px solid var(--gold);}
+  .q-card h3{font-size:14.5px;font-weight:600;color:var(--gold);margin-bottom:8px;font-family:'DM Sans',sans-serif;}
+  .q-card p{font-size:13px;color:var(--cream3);line-height:1.65;margin-bottom:12px;}
+  .write-here{background:var(--dark4);padding:10px 14px;font-style:italic;font-size:13px;color:var(--cream2);border-left:2px solid rgba(201,168,76,0.25);}
+
+  /* BEFORE AFTER */
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;}
+  .ba-bad{background:rgba(160,56,56,0.1);padding:18px 20px;}
+  .ba-good{background:rgba(61,122,90,0.1);padding:18px 20px;}
+  .ba-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;font-weight:600;display:block;}
+  .ba-bad .ba-label{color:#C06060;}
+  .ba-good .ba-label{color:#5EAA80;}
+  .ba-bad p,.ba-good p{font-style:italic;font-size:13px;color:var(--cream2);line-height:1.65;}
+
+  /* STEPS */
+  .steps{display:flex;flex-direction:column;gap:4px;margin-bottom:28px;}
+  .step{background:var(--dark2);padding:22px 24px;border-top:1.5px solid var(--gold);}
+  .step-label{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;display:block;}
+  .step h3{font-size:14px;font-weight:600;color:var(--cream);margin-bottom:8px;font-family:'DM Sans',sans-serif;}
+  .step p{font-size:13px;color:var(--cream3);line-height:1.65;}
+
+  /* FLOW */
+  .flow{background:var(--dark3);border:1px solid rgba(201,168,76,0.15);padding:20px;margin-bottom:28px;}
+  .flow-label{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;display:block;}
+  .flow-boxes{display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr 18px 1fr;gap:0;align-items:center;}
+  .flow-box{background:var(--dark4);padding:14px 12px;border-top:1.5px solid var(--gold);}
+  .fbl{font-size:8px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;display:block;}
+  .flow-box p{font-size:11.5px;color:var(--cream2);line-height:1.55;}
+  .flow-arrow{text-align:center;color:var(--goldf);font-size:14px;}
+
+  /* CTA */
+  .cta-block{border:1px solid rgba(201,168,76,0.22);background:rgba(201,168,76,0.04);padding:28px 28px 28px 34px;position:relative;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;}
+  .cta-block::before{content:'';position:absolute;top:0;left:0;width:2.5px;height:100%;background:var(--gold);}
+  .cta-block h3{font-size:15px;font-weight:600;color:var(--cream);margin-bottom:10px;font-family:'DM Sans',sans-serif;}
+  .cta-block p{font-size:13.5px;color:var(--cream2);line-height:1.7;margin-bottom:12px;}
+  .cta-action{font-size:13px;font-weight:600;color:var(--gold);}
+  .cta-right{text-align:right;flex-shrink:0;min-width:140px;}
+  .cta-right strong{display:block;font-size:13px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;}
+  .cta-right span{display:block;font-size:10px;color:var(--muted);margin-bottom:14px;letter-spacing:1px;}
+  .cta-btn{display:inline-block;border:1px solid rgba(201,168,76,0.4);padding:8px 14px;font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;text-decoration:none;transition:background .2s;}
+  .cta-btn:hover{background:rgba(201,168,76,0.08);}
+
+  .pg-footer{text-align:center;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:48px;text-transform:uppercase;padding:0 32px;}
+
+  @media(max-width:600px){
+    .ba-grid,.cta-block{grid-template-columns:1fr;}
+    .flow-boxes{grid-template-columns:1fr 1fr;}
+    .flow-arrow{display:none;}
+    .cta-right{text-align:left;}
+    nav{padding:0 20px;}
+    .container{padding:0 20px;}
+    section{padding:80px 0 64px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <span class="nav-name">Maryam Dilawar</span>
+  <div class="nav-pages">
+    <div class="nav-dot active"></div>
+    <div class="nav-dot"></div>
+    <div class="nav-dot"></div>
+    <div class="nav-dot"></div>
+    <div class="nav-dot"></div>
+  </div>
+</nav>
+
+<!-- PAGE 1 — COVER -->
+<section id="s1">
+  <div class="glow"></div>
+  <div class="container" style="text-align:center">
+    <p class="eyebrow">Free Guide · Small Business Owners</p>
+    <h1>
+      <span class="title-white">Stop Sounding</span><br>
+      <span class="title-gold">Like Everyone Else.</span>
+    </h1>
+    <p class="sub">Most businesses post. Few say anything real.<br>This guide helps you figure out what your business actually sounds like — and who it is actually for.</p>
+    <div class="promise-box">
+      <p class="pt">By page 5 you will have:</p>
+      <p>Your one real customer &nbsp;·&nbsp; Your voice in 3 words<br>Your first real post written and ready to go</p>
+    </div>
+    <div class="divider" style="margin:0 auto 24px"></div>
+    <div class="author-line">
+      <strong>MARYAM DILAWAR</strong>
+      Content Writer &nbsp;·&nbsp; Brand Voice &nbsp;·&nbsp; maryam-portfolio-rosy.vercel.app
+    </div>
+  </div>
+  <p class="pg-footer">1 / 5 &nbsp;·&nbsp; Stop Sounding Like Everyone Else &nbsp;·&nbsp; Maryam Dilawar</p>
+</section>
+
+<!-- PAGE 2 — THE PROBLEM -->
+<section id="s2">
+  <div class="container">
+    <span class="pg-label">The Problem Nobody Talks About</span>
+    <h2>
+      <span class="title-white">Your content is not bad.</span><br>
+      <span class="title-gold">It just sounds like nobody's.</span>
+    </h2>
+    <p class="intro">I look at small business content every single day. And I keep noticing the same thing. The business is real. The work is good. The owner is working hard. But the content could belong to any of their competitors. That is not a posting problem. That is a voice problem.</p>
+    <div class="signs">
+      <div class="sign"><span class="sign-num">01</span>
+        <h3>You are trying to speak to everyone.</h3>
+        <p>So nobody feels like you are speaking to them. When a post works for a 22-year-old student and a 50-year-old CEO equally, it resonates with neither.</p>
+      </div>
+      <div class="sign"><span class="sign-num">02</span>
+        <h3>Your brand sounds different depending on the day.</h3>
+        <p>Professional Monday. Casual Wednesday. Motivational Friday. Readers cannot build a picture of who you are. So they scroll past without registering you exist.</p>
+      </div>
+      <div class="sign"><span class="sign-num">03</span>
+        <h3>You describe what you do instead of what changes.</h3>
+        <p>"High quality services at competitive prices." Every business says this. None of them say what actually shifts for the customer who chooses them.</p>
+      </div>
+      <div class="sign"><span class="sign-num">04</span>
+        <h3>You post. You get silence. You do not know why.</h3>
+        <p>It is not the algorithm. It is not the time you posted. It is that nobody reading feels like this was written for them specifically. That is fixable. Starting now.</p>
+      </div>
+    </div>
+    <div class="pull-quote">"The fix is not posting more. It is knowing exactly who you are talking to and what your business genuinely sounds like."</div>
+  </div>
+  <p class="pg-footer">2 / 5 &nbsp;·&nbsp; Stop Sounding Like Everyone Else &nbsp;·&nbsp; Maryam Dilawar</p>
+</section>
+
+<!-- PAGE 3 — YOUR CUSTOMER -->
+<section id="s3">
+  <div class="container">
+    <span class="pg-label">Step One</span>
+    <h2>
+      <span class="title-white">Get specific about</span><br>
+      <span class="title-gold">one real person.</span>
+    </h2>
+    <p class="intro">Not a target audience. Not a demographic. One actual human being who has a problem your business solves. When a business gets genuinely clear on this, everything changes. The captions sharpen. The DMs get replies. Here is how to find that person.</p>
+    <div class="questions">
+      <div class="q-card">
+        <h3>What keeps them up at night?</h3>
+        <p>Not the surface problem. The one underneath. The thing they have not told anyone but scroll past thinking about. If you can name it before they do, they will read every word you write.</p>
+        <div class="write-here">"My customer lies awake worrying about ________________________________"</div>
+      </div>
+      <div class="q-card">
+        <h3>What do they feel when they see a competitor doing well?</h3>
+        <p>This one is uncomfortable but important. Frustration? The fear of falling behind? That emotion is your hook. Name it in your content and watch what happens to your engagement.</p>
+        <div class="write-here">"When they see a competitor winning, they feel _____________________________"</div>
+      </div>
+      <div class="q-card">
+        <h3>What does their life look like after working with you?</h3>
+        <p>Not your service. The transformation. What stops being a problem? What becomes possible? What do they finally stop worrying about? This is your real offer. Everything you write points here.</p>
+        <div class="write-here">"After working with me, my customer finally ________________________________"</div>
+      </div>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-bad"><span class="ba-label">✗ Without this clarity</span><p>"We help businesses of all sizes reach their full potential with tailored solutions." Nobody. This is for nobody.</p></div>
+      <div class="ba-good"><span class="ba-label">✓ With this clarity</span><p>"You have been running this for two years. The work is good. But your competitors keep getting the clients. That ends now."</p></div>
+    </div>
+  </div>
+  <p class="pg-footer">3 / 5 &nbsp;·&nbsp; Stop Sounding Like Everyone Else &nbsp;·&nbsp; Maryam Dilawar</p>
+</section>
+
+<!-- PAGE 4 — BRAND VOICE -->
+<section id="s4">
+  <div class="container">
+    <span class="pg-label">Step Two</span>
+    <h2>
+      <span class="title-white">Figure out what your</span><br>
+      <span class="title-gold">business actually sounds like.</span>
+    </h2>
+    <p class="intro">Most businesses do not have a posting problem. They have a clarity problem. They have never sat down and asked: if my business were a person walking into a room, how would they talk? Here is how you answer that honestly.</p>
+    <div class="questions">
+      <div class="q-card">
+        <h3>Three words. How do you want your business to feel?</h3>
+        <p>Not your values. The actual feeling someone gets in the first 10 seconds of reading your content. Think of a brand you love — they make you feel something specific instantly. What do you want yours to be? Write three honest words.</p>
+        <div class="write-here">My business should feel: _______________ / _______________ / _______________</div>
+      </div>
+      <div class="q-card">
+        <h3>What will you never sound like — and why?</h3>
+        <p>Your voice is shaped as much by what you reject as what you claim. Most businesses accidentally copy brands they admire and end up sounding like everyone else. Name the tone you will never use — and understand exactly why your clients deserve better than that.</p>
+        <div class="write-here">I will never sound like _______________ because my clients deserve ___________</div>
+      </div>
+      <div class="q-card">
+        <h3>If your best client described you to a friend, what would they say?</h3>
+        <p>Not what you want them to say. What they actually say. The real words a real person uses when they trust someone. Write that sentence. Then build every single post toward making it true.</p>
+        <div class="write-here">"You should work with her, she is the one who ______________________________"</div>
+      </div>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-bad"><span class="ba-label">✗ Without a clear voice</span><p>"At our organization we are committed to excellence and delivering outstanding results for all stakeholders." Nobody believes this. Nobody remembers it.</p></div>
+      <div class="ba-good"><span class="ba-label">✓ With a clear voice</span><p>"I kept watching good businesses get ignored online while average ones with louder voices won. So I help the good ones get heard." You remember this one.</p></div>
+    </div>
+  </div>
+  <p class="pg-footer">4 / 5 &nbsp;·&nbsp; Stop Sounding Like Everyone Else &nbsp;·&nbsp; Maryam Dilawar</p>
+</section>
+
+<!-- PAGE 5 — ACTION + CTA -->
+<section id="s5">
+  <div class="container">
+    <span class="pg-label">Step Three — Do This Today</span>
+    <h2>
+      <span class="title-white">Now write one post</span><br>
+      <span class="title-gold">that actually means something.</span>
+    </h2>
+    <p class="intro">You have done the thinking. You know who you are writing for and what your business sounds like. Now put it together. This is the exact structure I use when writing for any business — because it starts with the person, not the product.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-label">Step 1</span>
+        <h3>Line 1 — Name their problem.</h3>
+        <p>Use what you wrote in Q1 on page 3. The thing they wake up thinking about. Do not soften it. Do not add context first. Just say it. That first line is the only thing standing between them scrolling past and stopping to read.</p>
+      </div>
+      <div class="step">
+        <span class="step-label">Step 2</span>
+        <h3>Lines 2 to 5 — Show you understand why it happens.</h3>
+        <p>Not the solution yet. First you prove you get it. Write in your voice from page 4. Warm and direct if that is what you chose. Sharp and honest if that is yours. This is where they go from "interesting" to "this person gets my situation."</p>
+      </div>
+      <div class="step">
+        <span class="step-label">Step 3</span>
+        <h3>Last line — Name the transformation.</h3>
+        <p>Use Q3 from page 3. What their life looks like after working with you. Not a call to action. Not "DM me." The actual result. One sentence. Specific enough to feel real. That line is what makes them reach out.</p>
+      </div>
+    </div>
+    <div class="flow">
+      <span class="flow-label">The Post Formula — Use This Every Time</span>
+      <div class="flow-boxes">
+        <div class="flow-box"><span class="fbl">Line 1</span><p>Their problem.<br>As they feel it.<br>No softening.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="fbl">Lines 2–5</span><p>Why it happens.<br>In your voice.<br>No generic tips.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="fbl">Lines 6–8</span><p>One thing that<br>shifts how they<br>see it.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="fbl">Last Line</span><p>The transformation.<br>Specific. Real.<br>Then stop.</p></div>
+      </div>
+    </div>
+    <div class="cta-block">
+      <div>
+        <h3>If you know what you need but do not have time to do it —</h3>
+        <p>that is exactly what I do. I write your content every month in your brand voice. 20 posts. Done for you. So you can run your business instead of writing about it.</p>
+        <p class="cta-action">DM me on LinkedIn and just say "monthly content" — I will tell you exactly how it works.</p>
+      </div>
+      <div class="cta-right">
+        <strong>MARYAM DILAWAR</strong>
+        <span>Content Writer · Brand Voice</span>
+        <a class="cta-btn" href="https://www.linkedin.com/in/maryam-dilawar" target="_blank">Find me on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <p class="pg-footer">5 / 5 &nbsp;·&nbsp; Stop Sounding Like Everyone Else &nbsp;·&nbsp; Maryam Dilawar</p>
+</section>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (scrolled/total*100)+'%';
+    const sections = document.querySelectorAll('section');
+    const dots = document.querySelectorAll('.nav-dot');
+    sections.forEach((s,i) => {
+      const rect = s.getBoundingClientRect();
+      if(rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2){
+        dots.forEach(d => d.classList.remove('active'));
+        if(dots[i]) dots[i].classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>
